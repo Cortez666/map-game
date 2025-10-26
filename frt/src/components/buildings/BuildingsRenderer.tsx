@@ -44,17 +44,8 @@ export function BuildingsRenderer({
 
 			{activeBuilding && (
 				<Popup position={getCentroid(activeBuilding.geometry)} autoClose={false}>
-					<Box>
-						<Text fontWeight="bold">ID: {activeBuilding.id}</Text>
-						{activeBuilding.tags?.name && (
-							<>
-								<Text fontWeight="bold">Name: {activeBuilding.tags.name}</Text>
-							</>
-						)}
-						<Text fontWeight="bold">
-							Type: {activeBuilding.tags?.building || "N/A"}
-						</Text>
-					</Box>
+					<Text fontWeight="bold">ID: {activeBuilding.id}</Text>
+					<Text fontWeight="bold">Type: {activeBuilding.tags?.building || "N/A"}</Text>
 				</Popup>
 			)}
 		</Box>

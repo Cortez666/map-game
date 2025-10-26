@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useMapEvents } from "react-leaflet";
 import L, { LatLngBounds } from "leaflet";
@@ -38,13 +37,11 @@ export function BuildingsLayer() {
 	}, [buildings]);
 
 	return (
-		<Box>
-			<BuildingsRenderer
-				buildings={buildings}
-				activeBuilding={activeBuilding}
-				onClick={setActiveBuilding}
-				buildingRefs={buildingRefs}
-			/>
-		</Box>
+		<BuildingsRenderer
+			buildings={buildings}
+			activeBuilding={activeBuilding}
+			onClick={setActiveBuilding}
+			buildingRefs={buildingRefs}
+		/>
 	);
 }
