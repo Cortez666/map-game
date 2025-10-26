@@ -3,6 +3,18 @@ import { LatLngBounds } from "leaflet";
 export interface IBuildingProps {
 	id: string;
 	geometry: [number, number][];
+	tags?: Record<string, string>;
+}
+
+function generateBuildingId(geometry: [number, number][]): string {
+	const str = geometry.map(([lat, lon]) => `${lat.toFixed(5)},${lon.toFixed(5)}`).join(";");
+	let hash = 0;
+	for (let i = 0; i < str.length; i++) {
+		const chr = str.charCodeAt(i);
+		hash = (hash << 5) - hash + chr;
+		hash |= 0; // convert to 32-bit int
+	}
+	return `gen-${Math.abs(hash)}`;
 }
 
 export async function FetchBuildings(bounds: LatLngBounds): Promise<IBuildingProps[]> {
@@ -16,7 +28,7 @@ export async function FetchBuildings(bounds: LatLngBounds): Promise<IBuildingPro
     (
       way["building"](${south},${west},${north},${east});
     );
-    out geom;
+    out geom tags;
   `;
 
 	const response = await fetch("https://overpass-api.de/api/interpreter", {
@@ -33,8 +45,12 @@ export async function FetchBuildings(bounds: LatLngBounds): Promise<IBuildingPro
 
 	return data.elements
 		.filter((el: any) => el.type === "way" && el.geometry)
-		.map((el: any) => ({
-			id: String(el.id),
-			geometry: el.geometry.map((g: any) => [g.lat, g.lon]),
-		}));
+		.map((el: any) => {
+			const geometry = el.geometry.map((g: any) => [g.lat, g.lon]) as [number, number][];
+			return {
+				id: el.id ? String(el.id) : generateBuildingId(geometry),
+				geometry,
+				tags: el.tags || {},
+			};
+		});
 }
