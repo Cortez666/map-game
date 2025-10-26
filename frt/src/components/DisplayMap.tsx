@@ -42,7 +42,7 @@ export function DisplayMap(props: IMapProps) {
 				style={{ width: props.mapWidth, height: props.mapHeight }}
 			>
 				<TileLayer url={url} />
-				<BuildingsLayer outlineColor="black" outlineWeight={2} outlineFillOpacity={0.5} />
+				<BuildingsLayer />
 			</MapContainer>
 		</Box>
 	);

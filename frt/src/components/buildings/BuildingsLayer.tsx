@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useMapEvents } from "react-leaflet";
 import L, { LatLngBounds } from "leaflet";
@@ -28,20 +29,22 @@ export function BuildingsLayer() {
 	useEffect(() => {
 		const listener = (id: string) => {
 			const b = buildings.find((x) => x.id === id);
-			if (b) setActiveBuilding(b);
+			if (b) {
+				setActiveBuilding(b);
+			}
 		};
 		mapEvents.on("showBuildingPopup", listener);
 		return () => mapEvents.off("showBuildingPopup", listener);
 	}, [buildings]);
 
 	return (
-		<>
+		<Box>
 			<BuildingsRenderer
 				buildings={buildings}
 				activeBuilding={activeBuilding}
 				onClick={setActiveBuilding}
 				buildingRefs={buildingRefs}
 			/>
-		</>
+		</Box>
 	);
 }

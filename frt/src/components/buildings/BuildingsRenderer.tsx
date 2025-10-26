@@ -1,4 +1,4 @@
-// src/components/BuildingsRenderer.tsx
+import { Box, Text } from "@chakra-ui/react";
 import { Polygon, Popup } from "react-leaflet";
 import { type LatLngExpression } from "leaflet";
 import type { IBuildingProps } from "../../api/overpass";
@@ -10,11 +10,11 @@ interface IBuildingsRendererProps {
 	buildingRefs: React.RefObject<Map<string, L.Polygon>>;
 }
 
-const getCentroid = (geometry: [number, number][]): LatLngExpression => {
+function getCentroid(geometry: [number, number][]): LatLngExpression {
 	const lat = geometry.reduce((sum, [la]) => sum + la, 0) / geometry.length;
 	const lng = geometry.reduce((sum, [, lo]) => sum + lo, 0) / geometry.length;
 	return [lat, lng];
-};
+}
 
 export function BuildingsRenderer({
 	buildings,
@@ -23,7 +23,7 @@ export function BuildingsRenderer({
 	buildingRefs,
 }: IBuildingsRendererProps) {
 	return (
-		<>
+		<Box>
 			{buildings.map((b) => (
 				<Polygon
 					key={b.id}
@@ -44,17 +44,19 @@ export function BuildingsRenderer({
 
 			{activeBuilding && (
 				<Popup position={getCentroid(activeBuilding.geometry)} autoClose={false}>
-					<b>Building ID:</b> {activeBuilding.id}
-					<br />
-					{activeBuilding.tags?.name && (
-						<>
-							<b>Name:</b> {activeBuilding.tags.name}
-							<br />
-						</>
-					)}
-					<b>Type:</b> {activeBuilding.tags?.building || "N/A"}
+					<Box>
+						<Text fontWeight="bold">ID: {activeBuilding.id}</Text>
+						{activeBuilding.tags?.name && (
+							<>
+								<Text fontWeight="bold">Name: {activeBuilding.tags.name}</Text>
+							</>
+						)}
+						<Text fontWeight="bold">
+							Type: {activeBuilding.tags?.building || "N/A"}
+						</Text>
+					</Box>
 				</Popup>
 			)}
-		</>
+		</Box>
 	);
 }
