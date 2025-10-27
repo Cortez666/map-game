@@ -75,22 +75,24 @@ export function useBuildingLayerLogic() {
 	};
 }
 
-export function ChangeBuildingColor(
-	buildingRefs: React.RefObject<Map<string, L.Polygon>>,
-	id: string,
-	color: string
-): void {
-	if (!buildingRefs.current) return;
+// export function ChangeBuildingColorById(
+// 	buildingRefs: React.RefObject<Map<string, L.Polygon>>,
+// 	id: string,
+// 	color: string
+// ): void {
+// 	if (!buildingRefs.current) {
+// 		return;
+// 	}
 
-	const polygon = buildingRefs.current.get(id);
-	if (!polygon) {
-		console.warn(`Building with id "${id}" not found in refs.`);
-		return;
-	}
+// 	const polygon = buildingRefs.current.get(id);
+// 	if (!polygon) {
+// 		console.warn(`Building with id "${id}" not found in refs.`);
+// 		return;
+// 	}
 
-	// Update the polygon style dynamically
-	polygon.setStyle({
-		color: color,
-		fillColor: color,
-	});
-}
+// 	// Update the polygon style dynamically
+// 	polygon.setStyle({
+// 		color: color,
+// 		fillColor: color,
+// 	});
+// }

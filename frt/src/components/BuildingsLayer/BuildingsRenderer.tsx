@@ -3,11 +3,17 @@ import { type LatLngExpression } from "leaflet";
 import { type IBuildingProps } from "@/api/overpass";
 import { BuildingPopup } from "./BuildingsPopup";
 
+interface IColorOverride {
+	id: string;
+	color: string;
+}
+
 interface IBuildingRendererProps {
 	buildings: IBuildingProps[];
 	activeBuilding: IBuildingProps | null;
 	onClick: (b: IBuildingProps) => void;
 	buildingRefs: React.RefObject<Map<string, L.Polygon>>;
+	colorOverrides?: IColorOverride[];
 }
 
 function GetCentroid(geometry: [number, number][]): LatLngExpression {
@@ -25,6 +31,18 @@ function GetCentroid(geometry: [number, number][]): LatLngExpression {
 }
 
 export function BuildingsRenderer(props: IBuildingRendererProps) {
+	function GetBuildingColor(id: string): string {
+		const override = props.colorOverrides?.find(function (x) {
+			return x.id === id;
+		});
+
+		if (override) {
+			return override.color;
+		}
+
+		return "#000000";
+	}
+
 	function RenderPopup() {
 		if (!props.activeBuilding) {
 			return null;
@@ -40,8 +58,7 @@ export function BuildingsRenderer(props: IBuildingRendererProps) {
 
 		for (let i = 0; i < props.buildings.length; i++) {
 			const b = props.buildings[i];
-			const color =
-				props.activeBuilding && props.activeBuilding.id === b.id ? "#3182CE" : "#3182CE";
+			const color = GetBuildingColor(b.id);
 
 			items.push(
 				<Polygon
