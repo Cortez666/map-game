@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { BuildingsLayer } from "./BuildingsLayer/BuildingsLayer";
+import { MapToolbar } from "./MapToolbar";
 
 interface IMapProps {
 	position: [number, number];
@@ -19,9 +20,6 @@ export function DisplayMap(props: IMapProps) {
 
 	return (
 		<Box
-			display="flex"
-			justifyContent="center"
-			alignItems="center"
 			w={props.mapWidth}
 			h={props.mapHeight}
 			border="5px solid"
@@ -29,6 +27,7 @@ export function DisplayMap(props: IMapProps) {
 			borderRadius={props.borderRadius}
 			overflow="hidden"
 		>
+			<MapToolbar />
 			<MapContainer
 				doubleClickZoom={false}
 				zoomControl={false}

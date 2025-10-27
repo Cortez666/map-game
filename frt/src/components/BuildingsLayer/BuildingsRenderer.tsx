@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { Polygon } from "react-leaflet";
 import { type LatLngExpression } from "leaflet";
 import { type IBuildingProps } from "@/api/overpass";
@@ -87,9 +88,9 @@ export function BuildingsRenderer(props: IBuildingRendererProps) {
 	}
 
 	return (
-		<>
+		<Box>
 			{RenderBuildings()}
 			{RenderPopup()}
-		</>
+		</Box>
 	);
 }

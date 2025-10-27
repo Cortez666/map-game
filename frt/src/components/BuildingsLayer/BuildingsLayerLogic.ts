@@ -47,18 +47,18 @@ export function useBuildingLayerLogic() {
 	}
 
 	async function LoadColors(): Promise<void> {
-		const colors = await FetchBuildingsColors();
-		setColorOverrides(colors);
+		try {
+			const colors = await FetchBuildingsColors();
+			setColorOverrides(colors);
+		} catch (err) {
+			console.error("Error fetching building colors:", err);
+		}
 	}
 
 	const handleBoundsChange = useCallback(fetchBuildings, []);
-	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 100);
+	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 25);
 
 	useMapBoundsListener(debounceedHandleBoundsChange);
-
-	useEffect(function () {
-		LoadColors();
-	}, []);
 
 	useEffect(() => {
 		function listener(id: string) {
@@ -70,6 +70,8 @@ export function useBuildingLayerLogic() {
 				setActiveBuilding(found);
 			}
 		}
+
+		LoadColors();
 
 		mapEvents.on("showBuildingPopup", listener);
 

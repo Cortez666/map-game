@@ -1,4 +1,3 @@
-import React from "react";
 import { Container } from "@chakra-ui/react";
 import { DisplayMap } from "./components/DisplayMap.tsx";
 
@@ -9,8 +8,8 @@ export function App(): React.JSX.Element {
 				position={[51.39409, 22.96473]}
 				minZoom={15}
 				maxZoom={18}
-				mapWidth={"75vw"}
-				mapHeight={"75vh"}
+				mapWidth={"95vw"}
+				mapHeight={"95vh"}
 				borderColor="red"
 				borderRadius="2xl"
 				maxBounds={[
