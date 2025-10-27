@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { BuildingsLayer } from "./buildings/BuildingsLayer";
+import { BuildingsLayer } from "./BuildingsLayer/BuildingsLayer";
 
 interface IMapProps {
 	position: [number, number];
