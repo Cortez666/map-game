@@ -4,6 +4,7 @@ import { FetchBuildings, type IBuildingProps } from "@/api/overpass";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMapBoundsListener } from "@/hooks/useMapBoundsListener";
 import { mapEvents } from "@/events/mapEvents";
+import { FetchBuildingsColors, type IBuildingColorProps } from "@/api/buildingColors";
 
 function RoundCoord(value: number): number {
 	return parseFloat(value.toFixed(4));
@@ -19,6 +20,7 @@ function BoundsKey(bounds: LatLngBounds): string {
 
 export function useBuildingLayerLogic() {
 	const [buildings, setBuildings] = useState<IBuildingProps[]>([]);
+	const [colorOverrides, setColorOverrides] = useState<IBuildingColorProps[]>([]);
 	const [activeBuilding, setActiveBuilding] = useState<IBuildingProps | null>(null);
 	const buildingRefs = useRef<Map<string, L.Polygon>>(new Map());
 	const cahceRef = useRef<Map<string, IBuildingProps[]>>(new Map());
@@ -44,10 +46,19 @@ export function useBuildingLayerLogic() {
 		}
 	}
 
+	async function LoadColors(): Promise<void> {
+		const colors = await FetchBuildingsColors();
+		setColorOverrides(colors);
+	}
+
 	const handleBoundsChange = useCallback(fetchBuildings, []);
 	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 100);
 
 	useMapBoundsListener(debounceedHandleBoundsChange);
+
+	useEffect(function () {
+		LoadColors();
+	}, []);
 
 	useEffect(() => {
 		function listener(id: string) {
@@ -69,6 +80,7 @@ export function useBuildingLayerLogic() {
 
 	return {
 		buildings,
+		colorOverrides,
 		activeBuilding,
 		setActiveBuilding,
 		buildingRefs,
