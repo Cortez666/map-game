@@ -41,7 +41,7 @@ export function BuildingsRenderer(props: IBuildingRendererProps) {
 		for (let i = 0; i < props.buildings.length; i++) {
 			const b = props.buildings[i];
 			const color =
-				props.activeBuilding && props.activeBuilding.id === b.id ? "#E53E3E" : "#3182CE";
+				props.activeBuilding && props.activeBuilding.id === b.id ? "#3182CE" : "#3182CE";
 
 			items.push(
 				<Polygon

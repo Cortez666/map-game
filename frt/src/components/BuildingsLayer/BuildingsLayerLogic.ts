@@ -45,7 +45,7 @@ export function useBuildingLayerLogic() {
 	}
 
 	const handleBoundsChange = useCallback(fetchBuildings, []);
-	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 500);
+	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 100);
 
 	useMapBoundsListener(debounceedHandleBoundsChange);
 
@@ -73,4 +73,24 @@ export function useBuildingLayerLogic() {
 		setActiveBuilding,
 		buildingRefs,
 	};
+}
+
+export function ChangeBuildingColor(
+	buildingRefs: React.RefObject<Map<string, L.Polygon>>,
+	id: string,
+	color: string
+): void {
+	if (!buildingRefs.current) return;
+
+	const polygon = buildingRefs.current.get(id);
+	if (!polygon) {
+		console.warn(`Building with id "${id}" not found in refs.`);
+		return;
+	}
+
+	// Update the polygon style dynamically
+	polygon.setStyle({
+		color: color,
+		fillColor: color,
+	});
 }

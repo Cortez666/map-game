@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { BuildingsRenderer } from "./BuildingsRenderer";
 import { useBuildingLayerLogic } from "./BuildingsLayerLogic";
+import { ChangeBuildingColor } from "./BuildingsLayerLogic";
 
 export function BuildingsLayer() {
 	const logic = useBuildingLayerLogic();
@@ -14,6 +15,8 @@ export function BuildingsLayer() {
 		}),
 		[logic.buildings, logic.activeBuilding]
 	);
+
+	ChangeBuildingColor(logic.buildingRefs, "297010157", "#E53E3E");
 
 	return <BuildingsRenderer {...rendererProps} />;
 }
