@@ -23,7 +23,6 @@ export function BuildingPopup(props: IBuildingPopupProps) {
 				<VStack align="start" gap={1}>
 					<Text fontWeight="bold">{props.building.id}</Text>
 					<Badge>{props.building.tags?.building}</Badge>
-					<Badge>{props.building.tags?.building_level}</Badge>
 				</VStack>
 			</Box>
 		</Popup>

@@ -1,10 +1,10 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import L, { LatLngBounds } from "leaflet";
 import { FetchBuildings, type IBuildingProps } from "@/api/overpass";
+import { FetchBuildingsColors, type IBuildingColorProps } from "@/api/buildingColors";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMapBoundsListener } from "@/hooks/useMapBoundsListener";
 import { mapEvents } from "@/events/mapEvents";
-import { FetchBuildingsColors, type IBuildingColorProps } from "@/api/buildingColors";
 
 function RoundCoord(value: number): number {
 	return parseFloat(value.toFixed(4));
@@ -86,25 +86,3 @@ export function useBuildingLayerLogic() {
 		buildingRefs,
 	};
 }
-
-// export function ChangeBuildingColorById(
-// 	buildingRefs: React.RefObject<Map<string, L.Polygon>>,
-// 	id: string,
-// 	color: string
-// ): void {
-// 	if (!buildingRefs.current) {
-// 		return;
-// 	}
-
-// 	const polygon = buildingRefs.current.get(id);
-// 	if (!polygon) {
-// 		console.warn(`Building with id "${id}" not found in refs.`);
-// 		return;
-// 	}
-
-// 	// Update the polygon style dynamically
-// 	polygon.setStyle({
-// 		color: color,
-// 		fillColor: color,
-// 	});
-// }

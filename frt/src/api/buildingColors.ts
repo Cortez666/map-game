@@ -13,9 +13,15 @@ export async function FetchBuildingsColors(): Promise<IBuildingColorProps[]> {
 			throw new Error(`Overpass API error: ${response.statusText}`);
 		}
 
-		const data = (await response.json()) as IBuildingColorProps[];
+		const text = await response.text();
 
-		return data;
+		try {
+			const data = JSON.parse(text) as IBuildingColorProps[];
+			return data;
+		} catch (err) {
+			console.error("Invalid JSON in buildingColors.json:", text);
+			throw err;
+		}
 	} catch (err) {
 		console.error("Error fetching building colors:", err);
 		return [];
