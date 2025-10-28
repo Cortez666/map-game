@@ -2,7 +2,8 @@ import { Text, Button } from "@chakra-ui/react";
 import { Tooltip } from "../ui/tooltip";
 
 interface IToolbarButtonProps {
-	tooltip: string;
+	tooltip?: boolean;
+	tooltipText?: string;
 	onClick: () => void;
 	disabled?: boolean;
 	buttonTetxt?: string;
@@ -10,7 +11,7 @@ interface IToolbarButtonProps {
 
 export function ToolbarButton(props: IToolbarButtonProps) {
 	return (
-		<Tooltip content={props.tooltip}>
+		<Tooltip content={props.tooltipText} disabled={!props.tooltip}>
 			<Button
 				size="sm"
 				variant="solid"
@@ -18,6 +19,7 @@ export function ToolbarButton(props: IToolbarButtonProps) {
 				backgroundColor="blue.600"
 				onClick={props.onClick}
 				disabled={props.disabled}
+				_hover={{ bg: "teal" }}
 			>
 				<Text>{props.buttonTetxt}</Text>
 			</Button>

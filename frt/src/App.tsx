@@ -3,7 +3,7 @@ import { DisplayMap } from "./components/DisplayMap.tsx";
 
 export function App(): React.JSX.Element {
 	return (
-		<Container centerContent p={2}>
+		<Container centerContent fluid p={2}>
 			<DisplayMap
 				position={[51.39409, 22.96473]}
 				minZoom={17}
