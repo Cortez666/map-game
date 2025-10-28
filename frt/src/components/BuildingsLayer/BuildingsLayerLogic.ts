@@ -56,7 +56,7 @@ export function useBuildingLayerLogic() {
 	}
 
 	const handleBoundsChange = useCallback(fetchBuildings, []);
-	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 25);
+	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 500);
 
 	useMapBoundsListener(debounceedHandleBoundsChange);
 
@@ -71,14 +71,16 @@ export function useBuildingLayerLogic() {
 			}
 		}
 
-		LoadColors();
-
 		mapEvents.on("showBuildingPopup", listener);
 
 		return function cleanup() {
 			mapEvents.off("showBuildingPopup", listener);
 		};
 	}, [buildings]);
+
+	useEffect(() => {
+		LoadColors();
+	}, []);
 
 	return {
 		buildings,

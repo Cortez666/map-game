@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { BuildingsLayer } from "./BuildingsLayer/BuildingsLayer";
-import { MapToolbar } from "./MapToolbar";
+import { MapToolbar } from "./Toolbar/MapToolbar";
 
 interface IMapProps {
 	position: [number, number];

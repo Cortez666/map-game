@@ -24,7 +24,7 @@ export async function FetchBuildings(bounds: LatLngBounds): Promise<IBuildingPro
 	const east = bounds.getEast();
 
 	const query = `
-    [out:json][timeout:25];
+    [out:json][timeout:3600];
     (
       way["building"](${south},${west},${north},${east});
     );

@@ -6,7 +6,7 @@ export function App(): React.JSX.Element {
 		<Container centerContent p={2}>
 			<DisplayMap
 				position={[51.39409, 22.96473]}
-				minZoom={15}
+				minZoom={17}
 				maxZoom={18}
 				mapWidth={"95vw"}
 				mapHeight={"95vh"}
