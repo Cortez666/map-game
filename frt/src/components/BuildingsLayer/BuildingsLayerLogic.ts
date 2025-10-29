@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import L, { LatLngBounds } from "leaflet";
 import { FetchBuildings, type IBuildingProps } from "@/api/overpass";
 import { FetchBuildingsColors, type IBuildingColorProps } from "@/api/buildingColors";
+import { FetchBuildingsIcons, type IBuildingIconProps } from "@/api/buildingIcons";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMapBoundsListener } from "@/hooks/useMapBoundsListener";
 import { mapEvents } from "@/events/mapEvents";
@@ -21,6 +22,7 @@ function BoundsKey(bounds: LatLngBounds): string {
 export function useBuildingLayerLogic() {
 	const [buildings, setBuildings] = useState<IBuildingProps[]>([]);
 	const [colorOverrides, setColorOverrides] = useState<IBuildingColorProps[]>([]);
+	const [iconOverrides, setIconOverrides] = useState<IBuildingIconProps[]>([]);
 	const [activeBuilding, setActiveBuilding] = useState<IBuildingProps | null>(null);
 	const buildingRefs = useRef<Map<string, L.Polygon>>(new Map());
 	const cahceRef = useRef<Map<string, IBuildingProps[]>>(new Map());
@@ -55,6 +57,15 @@ export function useBuildingLayerLogic() {
 		}
 	}
 
+	async function LoadIcons(): Promise<void> {
+		try {
+			const icons = await FetchBuildingsIcons();
+			setIconOverrides(icons);
+		} catch (err) {
+			console.error("Error fetching building icons:", err);
+		}
+	}
+
 	const handleBoundsChange = useCallback(fetchBuildings, []);
 	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 500);
 
@@ -80,11 +91,13 @@ export function useBuildingLayerLogic() {
 
 	useEffect(() => {
 		LoadColors();
+		LoadIcons();
 	}, []);
 
 	return {
 		buildings,
 		colorOverrides,
+		iconOverrides,
 		activeBuilding,
 		setActiveBuilding,
 		buildingRefs,

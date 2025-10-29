@@ -12,10 +12,7 @@ export function BuildingsLayer() {
 			activeBuilding: logic.activeBuilding,
 			onClick: logic.setActiveBuilding,
 			buildingRefs: logic.buildingRefs,
-			iconOverrides: [
-				{ id: "378051788", icon: "house.png" },
-				{ id: "378051789", icon: "house.png" },
-			],
+			iconOverrides: logic.iconOverrides,
 		}),
 		[logic.buildings, logic.activeBuilding]
 	);
