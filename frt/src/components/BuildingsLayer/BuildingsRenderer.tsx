@@ -59,13 +59,11 @@ export function BuildingsRenderer(props: IBuildingRendererProps) {
 		}
 
 		const iconUrl = iconData.icon.startsWith("/") ? iconData.icon : `/Icons/${iconData.icon}`;
-		console.log("Loaded icon for", id, iconUrl);
 
 		return L.icon({
 			iconUrl,
 			iconSize: [32, 32],
 			iconAnchor: [16, 16],
-			className: "building-icon",
 		});
 	}
 
@@ -105,7 +103,7 @@ export function BuildingsRenderer(props: IBuildingRendererProps) {
 					eventHandlers={{
 						click: () => props.onClick(b),
 					}}
-					zIndexOffset={1001}
+					zIndexOffset={1000}
 				/>
 			);
 		}
