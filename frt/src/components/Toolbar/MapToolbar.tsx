@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Spacer, Icon } from "@chakra-ui/react";
+import { Box, Flex, Text, Spacer } from "@chakra-ui/react";
 import { ToolbarButton } from "./ToolbarButton";
 import { ToolbarIcon } from "./ToolbarIcon";
 
