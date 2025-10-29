@@ -58,7 +58,7 @@ export function BuildingsRenderer(props: IBuildingRendererProps) {
 			return null;
 		}
 
-		const iconUrl = iconData.icon.startsWith("/") ? iconData.icon : `/Icons/${iconData.icon}`;
+		const iconUrl = iconData.icon.startsWith("/") ? iconData.icon : `/icons/${iconData.icon}`;
 
 		return L.icon({
 			iconUrl,
