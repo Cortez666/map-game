@@ -4,6 +4,8 @@ import L, { type LatLngExpression } from "leaflet";
 import { type IBuildingProps } from "@/api/overpass";
 import { BuildingPopup } from "./BuildingsPopup";
 import type React from "react";
+import { type IconType } from "react-icons";
+import ReactDOMServer from "react-dom/server";
 
 interface IColorOverride {
 	id: string;
@@ -12,7 +14,9 @@ interface IColorOverride {
 
 interface IIconOverride {
 	id: string;
-	icon: string;
+	icon: IconType;
+	color?: string;
+	size?: number;
 }
 
 interface IBuildingRendererProps {
@@ -51,19 +55,31 @@ export function BuildingsRenderer(props: IBuildingRendererProps) {
 		return "#000000";
 	}
 
-	function GetBuildingIcon(id: string): L.Icon | null {
+	function GetBuildingIcon(id: string): L.DivIcon | null {
 		const iconData = props.iconOverrides?.find((x) => x.id === id);
+		if (!iconData) return null;
 
-		if (!iconData) {
-			return null;
-		}
+		const IconComp = iconData.icon;
+		const color = iconData.color ?? "#2D3748";
+		const size = iconData.size ?? 22;
 
-		const iconUrl = iconData.icon.startsWith("/") ? iconData.icon : `/icons/${iconData.icon}`;
+		const iconHtml = ReactDOMServer.renderToStaticMarkup(
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				<IconComp color={color} size={size} />
+			</div>
+		);
 
-		return L.icon({
-			iconUrl,
-			iconSize: [32, 32],
-			iconAnchor: [16, 16],
+		return L.divIcon({
+			html: iconHtml,
+			className: "building-react-icon",
+			iconSize: [size, size],
+			iconAnchor: [size / 2, size / 2],
 		});
 	}
 

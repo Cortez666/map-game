@@ -43,8 +43,10 @@ export function MapToolbar() {
 				<Flex gap={6}>
 					<ToolbarIcon
 						icon={BiDollarCircle}
+						tooltip
+						tooltipText="Money"
 						gap={2}
-						text="0"
+						value={100}
 						textColor="yellow.600"
 						textWeight="bold"
 						textSize="xl"
@@ -52,8 +54,10 @@ export function MapToolbar() {
 					/>
 					<ToolbarIcon
 						icon={GiBeerBottle}
+						tooltip
+						tooltipText="Beer"
 						gap={2}
-						text="0"
+						value={2}
 						textColor="yellow.600"
 						textWeight="bold"
 						textSize="xl"

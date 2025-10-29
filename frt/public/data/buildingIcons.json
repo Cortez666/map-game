@@ -1,4 +1,17 @@
 [
-	{ "id": "378051788", "icon": "house.png" },
-	{ "id": "378051789", "icon": "house.png" }
+	{
+		"id": "378051788",
+		"icon": "FaHouse",
+		"color": "red"
+	},
+	{
+		"id": "378051789",
+		"icon": "FaHouse",
+		"color": "red"
+	},
+	{
+		"id": "297010157",
+		"icon": "FaShoppingCart",
+		"color": "blue"
+	}
 ]
