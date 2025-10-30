@@ -26,5 +26,12 @@ export function useCustomIconsLayerLogic() {
 		setActiveIcon(null);
 	}
 
-	return { icons, activeIcon, handleIconClick, closePopup };
+	function handleClick() {
+		console.log("handleClick");
+		setTimeout(() => {
+			console.log("handleClick timeout");
+		}, 1000);
+	}
+
+	return { icons, activeIcon, handleIconClick, closePopup, handleClick };
 }

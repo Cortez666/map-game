@@ -6,11 +6,20 @@ import { type ICustomIconsProps } from "@/api/customIcons";
 interface ICustomIconPopupProps {
 	icon: ICustomIconsProps;
 	position: LatLngExpression;
+	closePopup: () => void;
+	onClick: () => void;
 }
 
 export function CustomIconPopup(props: ICustomIconPopupProps) {
 	return (
-		<Popup position={props.position} autoClose={true}>
+		<Popup
+			position={props.position}
+			autoClose={true}
+			eventHandlers={{
+				
+				
+			}}
+		>
 			<Box
 				bg="white"
 				p={3}
@@ -24,7 +33,12 @@ export function CustomIconPopup(props: ICustomIconPopupProps) {
 					<Text fontWeight="bold">{props.icon.id}</Text>
 					<Text>{props.icon.description}</Text>
 					<Badge>{props.icon.type}</Badge>
-					<Button variant="solid" backgroundColor="blue.600" color="white">
+					<Button
+						variant="solid"
+						backgroundColor="blue.600"
+						color="white"
+						onClick={props.onClick}
+					>
 						{props.icon.buttonText}
 					</Button>
 				</VStack>

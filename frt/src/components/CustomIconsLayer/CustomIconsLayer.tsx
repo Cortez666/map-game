@@ -11,6 +11,8 @@ export function CustomIconsLayer() {
 			activeIcon: logic.activeIcon,
 			handleIconClick: logic.handleIconClick,
 			onIconClick: logic.handleIconClick,
+			closePopup: logic.closePopup,
+			onClick: logic.handleClick,
 		};
 	}, [logic.icons, logic.activeIcon]);
 

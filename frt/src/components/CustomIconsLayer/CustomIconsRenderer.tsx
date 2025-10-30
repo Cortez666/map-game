@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { Marker } from "react-leaflet";
 import L from "leaflet";
 import ReactDOMServer from "react-dom/server";
@@ -8,9 +9,17 @@ interface Props {
 	icons: ICustomIconsProps[];
 	activeIcon: ICustomIconsProps | null;
 	onIconClick: (icon: ICustomIconsProps) => void;
+	closePopup: () => void;
+	onClick: () => void;
 }
 
-export function CustomIconsRenderer({ icons, activeIcon, onIconClick }: Props) {
+export function CustomIconsRenderer({
+	icons,
+	activeIcon,
+	onIconClick,
+	closePopup,
+	onClick,
+}: Props) {
 	function CreateDivIcon(item: ICustomIconsProps): L.DivIcon {
 		const html = ReactDOMServer.renderToStaticMarkup(
 			<div
@@ -34,7 +43,7 @@ export function CustomIconsRenderer({ icons, activeIcon, onIconClick }: Props) {
 	}
 
 	return (
-		<>
+		<Box>
 			{icons.map((i) => (
 				<Marker
 					key={i.id}
@@ -44,16 +53,18 @@ export function CustomIconsRenderer({ icons, activeIcon, onIconClick }: Props) {
 					eventHandlers={{
 						click: () => onIconClick(i),
 					}}
-				/>
+				>
+					{activeIcon && (
+						<CustomIconPopup
+							icon={activeIcon}
+							position={[activeIcon.lat, activeIcon.lng]}
+							key={activeIcon.id}
+							closePopup={() => closePopup()}
+							onClick={() => onClick()}
+						/>
+					)}
+				</Marker>
 			))}
-
-			{activeIcon && (
-				<CustomIconPopup
-					icon={activeIcon}
-					position={[activeIcon.lat, activeIcon.lng]}
-					key={activeIcon.id}
-				/>
-			)}
-		</>
+		</Box>
 	);
 }
