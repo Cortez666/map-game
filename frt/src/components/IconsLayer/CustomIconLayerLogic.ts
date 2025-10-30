@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { fetchCustomIcons, type ICustomIconsProps } from "@/api/customIcons";
 
-export function useCustomIcons() {
+export function useCustomIconsLayerLogic() {
 	const [icons, setIcons] = useState<ICustomIconsProps[]>([]);
 	const [activeIcon, setActiveIcon] = useState<ICustomIconsProps | null>(null);
 

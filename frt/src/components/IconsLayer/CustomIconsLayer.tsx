@@ -1,10 +1,18 @@
+import { useMemo } from "react";
 import { CustomIconsRenderer } from "./CustomIconsRenderer";
-import { useCustomIcons } from "./CustomIconLayerLogic";
+import { useCustomIconsLayerLogic } from "./CustomIconLayerLogic";
 
 export function CustomIconsLayer() {
-	const { icons, activeIcon, handleIconClick } = useCustomIcons();
+	const logic = useCustomIconsLayerLogic();
 
-	return (
-		<CustomIconsRenderer icons={icons} activeIcon={activeIcon} onIconClick={handleIconClick} />
-	);
+	const renderProps = useMemo(() => {
+		return {
+			icons: logic.icons,
+			activeIcon: logic.activeIcon,
+			handleIconClick: logic.handleIconClick,
+			onIconClick: logic.handleIconClick,
+		};
+	}, [logic.icons, logic.activeIcon]);
+
+	return <CustomIconsRenderer {...renderProps} />;
 }
