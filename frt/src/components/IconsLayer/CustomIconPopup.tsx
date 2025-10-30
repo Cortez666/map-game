@@ -10,7 +10,7 @@ interface ICustomIconPopupProps {
 
 export function CustomIconPopup(props: ICustomIconPopupProps) {
 	return (
-		<Popup position={props.position} autoClose={false}>
+		<Popup position={props.position} autoClose={true}>
 			<Box
 				bg="white"
 				p={3}
@@ -23,6 +23,7 @@ export function CustomIconPopup(props: ICustomIconPopupProps) {
 				<VStack align="start" gap={1}>
 					<Text fontWeight="bold">{props.icon.id}</Text>
 					<Text>{props.icon.description}</Text>
+					<Badge>{props.icon.type}</Badge>
 					<Button variant="solid" backgroundColor="blue.600" color="white">
 						{props.icon.buttonText}
 					</Button>

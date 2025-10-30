@@ -8,6 +8,7 @@ export interface ICustomIconsProps {
 	icon: IconType;
 	color?: string;
 	size?: number;
+	type?: string;
 	title?: string;
 	description?: string;
 	buttonText?: string;
@@ -34,6 +35,7 @@ export async function fetchCustomIcons(): Promise<ICustomIconsProps[]> {
 					lng: item.lng,
 					icon: Icon,
 					color: item.color,
+					type: item.type,
 					size: item.size ?? 22,
 					title: item.title,
 					description: item.description,
