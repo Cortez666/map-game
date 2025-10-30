@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { BuildingsLayer } from "./BuildingsLayer/BuildingsLayer";
+import { CustomIconsLayer } from "./IconsLayer/CustomIconsLayer";
 import { MapToolbar } from "./Toolbar/MapToolbar";
 
 interface IMapProps {
@@ -42,6 +43,7 @@ export function DisplayMap(props: IMapProps) {
 			>
 				<TileLayer url={url} />
 				<BuildingsLayer />
+				<CustomIconsLayer />
 			</MapContainer>
 		</Box>
 	);

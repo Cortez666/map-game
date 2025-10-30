@@ -1,0 +1,13 @@
+[
+	{
+		"id": "meadow-spot-1",
+		"lat": 51.3913375,
+		"lng": 22.9676686,
+		"icon": "PiFarm",
+		"color": "orange",
+		"size": 32,
+		"title": "Meadow Farm",
+		"description": "You can get work here.",
+		"buttonText": "Work"
+	}
+]
