@@ -5,11 +5,12 @@ import { ToolbarIcon } from "./ToolbarIcon";
 
 import { BiDollarCircle } from "react-icons/bi";
 import { GiBeerBottle } from "react-icons/gi";
+import { GiNightSleep } from "react-icons/gi";
 
 import { useResources } from "@/context/ResourcesContext";
 
 export function MapToolbar() {
-	const { moneyAmount, beerAmount } = useResources();
+	const { moneyAmount, beerAmount, fatigueAmount, fatigueColor } = useResources();
 
 	function handleReload(): void {
 		window.location.reload();
@@ -26,7 +27,7 @@ export function MapToolbar() {
 			bg="whiteAlpha.900"
 			p={2}
 		>
-			<Flex direction="row" align="center" justify="space-between" gap={6}>
+			<Flex order={0} direction="row" align="center" justify="space-between" gap={6}>
 				<Flex order={0}>
 					<ToolbarText text="Map Controlls" />
 				</Flex>
@@ -42,7 +43,21 @@ export function MapToolbar() {
 					<ToolbarButton buttonTetxt="Test3" onClick={handleReload} />
 				</Flex>
 			</Flex>
-			<Flex direction="row" align="center" justify="space-between" gap={6}>
+			<Flex order={1} direction="row" align="center" justify="space-between" gap={6}>
+				<Flex order={0}>
+					<ToolbarText text="Player Stats" />
+				</Flex>
+				<Spacer />
+				<Flex order={1} gap={6}>
+					<ToolbarIcon
+						icon={GiNightSleep}
+						tooltip
+						tooltipText={"Fatigue: " + fatigueAmount + " %"}
+						color={fatigueColor}
+					/>
+				</Flex>
+			</Flex>
+			<Flex order={2} direction="row" align="center" justify="space-between" gap={6}>
 				<Flex order={0}>
 					<ToolbarText text="Resources" />
 				</Flex>
