@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Polygon, Marker } from "react-leaflet";
-import L, { type LatLngExpression } from "leaflet";
+import L, { icon, type LatLngExpression } from "leaflet";
 import { type IBuildingProps } from "@/api/overpass";
 import { BuildingPopup } from "./BuildingsPopup";
 import type React from "react";
@@ -133,6 +133,7 @@ export function BuildingsRenderer(props: IBuildingRendererProps) {
 				<BuildingPopup
 					building={props.activeBuilding}
 					position={GetCentroid(props.activeBuilding.geometry)}
+					icon={props.iconOverrides?.find((x) => x.id === props.activeBuilding?.id)}
 				/>
 			)}
 		</Box>

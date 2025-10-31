@@ -7,6 +7,7 @@ export interface IBuildingIconProps {
 	icon: IconType;
 	color?: string;
 	size?: number;
+	buttonText?: string;
 }
 
 const ICON_MAP: Record<string, IconType> = {
@@ -33,6 +34,7 @@ export async function FetchBuildingsIcons(): Promise<IBuildingIconProps[]> {
 					icon: Icon,
 					color: item.color,
 					size: item.size ?? 32,
+					buttonText: item.buttonText,
 				};
 			})
 			.filter(Boolean);

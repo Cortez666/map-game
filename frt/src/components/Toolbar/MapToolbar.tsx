@@ -1,5 +1,6 @@
-import { Box, Flex, Text, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Spacer } from "@chakra-ui/react";
 import { ToolbarButton } from "./ToolbarButton";
+import { ToolbarText } from "./ToolbarText";
 import { ToolbarIcon } from "./ToolbarIcon";
 
 import { BiDollarCircle } from "react-icons/bi";
@@ -8,7 +9,7 @@ import { GiBeerBottle } from "react-icons/gi";
 import { useResources } from "@/context/ResourcesContext";
 
 export function MapToolbar() {
-	const { moneyAmount } = useResources();
+	const { moneyAmount, beerAmount } = useResources();
 
 	function handleReload(): void {
 		window.location.reload();
@@ -27,9 +28,7 @@ export function MapToolbar() {
 		>
 			<Flex direction="row" align="center" justify="space-between" gap={6}>
 				<Flex order={0}>
-					<Text fontWeight="bold" color="blue.600">
-						Map Controls
-					</Text>
+					<ToolbarText text="Map Controlls" />
 				</Flex>
 				<Spacer />
 				<Flex order={1} gap={2}>
@@ -44,7 +43,10 @@ export function MapToolbar() {
 				</Flex>
 			</Flex>
 			<Flex direction="row" align="center" justify="space-between" gap={6}>
-				<Flex gap={6}>
+				<Flex order={0}>
+					<ToolbarText text="Resources" />
+				</Flex>
+				<Flex order={1} gap={6}>
 					<ToolbarIcon
 						icon={BiDollarCircle}
 						tooltip
@@ -61,7 +63,7 @@ export function MapToolbar() {
 						tooltip
 						tooltipText="Beer"
 						gap={2}
-						value={0}
+						value={beerAmount}
 						textColor="yellow.600"
 						textWeight="bold"
 						textSize="xl"

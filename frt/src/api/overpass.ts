@@ -1,9 +1,11 @@
 import { LatLngBounds } from "leaflet";
+import { type IBuildingIconProps } from "./buildingIcons";
 
 export interface IBuildingProps {
 	id: string;
 	geometry: [number, number][];
-	tags?: Record<string, string>;
+	tags?: Record<string, string>;	
+	icons?: IBuildingIconProps;
 }
 
 function generateBuildingId(geometry: [number, number][]): string {
@@ -51,6 +53,7 @@ export async function FetchBuildings(bounds: LatLngBounds): Promise<IBuildingPro
 				id: el.id ? String(el.id) : generateBuildingId(geometry),
 				geometry,
 				tags: el.tags || {},
+				icons: el.tags?.icons ? JSON.parse(el.tags.icons) : [],
 			};
 		});
 }

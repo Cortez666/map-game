@@ -2,16 +2,19 @@
 	{
 		"id": "378051788",
 		"icon": "FaHouse",
-		"color": "red"
+		"color": "red",
+		"buttonText": "Sleep"
 	},
 	{
 		"id": "378051789",
 		"icon": "FaHouse",
-		"color": "red"
+		"color": "red",
+		"buttonText": "Sleep"
 	},
 	{
 		"id": "297010157",
 		"icon": "FaShoppingCart",
-		"color": "blue"
+		"color": "blue",
+		"buttonText": "Trade"
 	}
 ]
