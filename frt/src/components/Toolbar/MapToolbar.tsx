@@ -5,7 +5,11 @@ import { ToolbarIcon } from "./ToolbarIcon";
 import { BiDollarCircle } from "react-icons/bi";
 import { GiBeerBottle } from "react-icons/gi";
 
+import { useResources } from "@/context/ResourcesContext";
+
 export function MapToolbar() {
+	const { moneyAmount } = useResources();
+
 	function handleReload(): void {
 		window.location.reload();
 	}
@@ -46,7 +50,7 @@ export function MapToolbar() {
 						tooltip
 						tooltipText="Money"
 						gap={2}
-						value={0}
+						value={moneyAmount}
 						textColor="yellow.600"
 						textWeight="bold"
 						textSize="xl"
