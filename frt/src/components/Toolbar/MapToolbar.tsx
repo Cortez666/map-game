@@ -8,9 +8,11 @@ import { GiBeerBottle } from "react-icons/gi";
 import { GiNightSleep } from "react-icons/gi";
 
 import { useResources } from "@/context/ResourcesContext";
+import { useStats } from "@/context/StatsContext";
 
 export function MapToolbar() {
-	const { moneyAmount, beerAmount, fatigueAmount, fatigueColor } = useResources();
+	const { moneyAmount, beerAmount } = useResources();
+	const { fatigueAmount, fatigueColor } = useStats();
 
 	function handleReload(): void {
 		window.location.reload();
