@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface IStatsContextProps {
 	fatigueAmount: number;
@@ -14,7 +14,7 @@ export function StatsProvider({ children }: { children: React.ReactNode }) {
 
 	const fatigueColors = ["red", "orange", "yellow", "green"];
 	const fatigueColor = fatigueColors[Math.floor(fatigueAmount / 25)] as string;
-	let isSleeping = false as boolean;
+	// let isSleeping = false as boolean;
 
 	function sleep(amount: number) {
 		setFatigueAmount(fatigueAmount - amount);

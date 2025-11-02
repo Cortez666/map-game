@@ -1,10 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { fetchCustomIcons, type ICustomIconsProps } from "@/api/customIcons";
 
-import { useResources } from "@/context/ResourcesContext";
-
 export function useCustomIconsLayerLogic() {
-	const { setMoney } = useResources();
 
 	const [icons, setIcons] = useState<ICustomIconsProps[]>([]);
 	const [activeIcon, setActiveIcon] = useState<ICustomIconsProps | null>(null);
