@@ -54,7 +54,7 @@ export function MapToolbar() {
 					<ToolbarIcon
 						icon={GiNightSleep}
 						tooltip
-						tooltipText={"Fatigue: " + fatigueAmount + " %"}
+						tooltipText={"Fatigue: " + fatigueAmount + " h"}
 						color={fatigueColor}
 					/>
 				</Flex>

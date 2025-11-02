@@ -1,11 +1,13 @@
 import { Box } from "@chakra-ui/react";
 import { Polygon, Marker } from "react-leaflet";
-import L, { icon, type LatLngExpression } from "leaflet";
+import L, { type LatLngExpression } from "leaflet";
 import { type IBuildingProps } from "@/api/overpass";
 import { BuildingPopup } from "./BuildingsPopup";
 import type React from "react";
 import { type IconType } from "react-icons";
 import ReactDOMServer from "react-dom/server";
+
+import { useStats } from "@/context/StatsContext";
 
 interface IColorOverride {
 	id: string;
@@ -43,6 +45,8 @@ function GetCentroid(geometry: [number, number][]): LatLngExpression {
 }
 
 export function BuildingsRenderer(props: IBuildingRendererProps) {
+	const { sleep } = useStats();
+
 	function GetBuildingColor(id: string): string {
 		const override = props.colorOverrides?.find(function (x) {
 			return x.id === id;
@@ -134,6 +138,7 @@ export function BuildingsRenderer(props: IBuildingRendererProps) {
 					building={props.activeBuilding}
 					position={GetCentroid(props.activeBuilding.geometry)}
 					icon={props.iconOverrides?.find((x) => x.id === props.activeBuilding?.id)}
+					onClick={() => sleep?.(1)}
 				/>
 			)}
 		</Box>

@@ -32,10 +32,6 @@ export function useCustomIconsLayerLogic() {
 
 	function handleClick() {
 		console.log("handleClick");
-		setTimeout(() => {
-			console.log("handleClick timeout");
-			setMoney(100);
-		}, 1000);
 	}
 
 	return { icons, activeIcon, handleIconClick, closePopup, handleClick };

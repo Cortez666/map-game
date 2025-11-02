@@ -8,6 +8,7 @@ interface IBuildingPopupProps {
 	building: IBuildingProps;
 	position: LatLngExpression;
 	icon?: IBuildingIconProps;
+	onClick?: () => void;
 }
 
 export function BuildingPopup(props: IBuildingPopupProps) {
@@ -25,7 +26,12 @@ export function BuildingPopup(props: IBuildingPopupProps) {
 				<VStack align="start" gap={1}>
 					<Text fontWeight="bold">{props.building.id}</Text>
 					<Badge>{props.building.tags?.building}</Badge>
-					<Button variant="solid" backgroundColor="blue.600" color="white">
+					<Button
+						variant="solid"
+						backgroundColor="blue.600"
+						color="white"
+						onClick={props.onClick}
+					>
 						{props.icon?.buttonText}
 					</Button>
 				</VStack>

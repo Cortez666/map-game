@@ -10,34 +10,45 @@ interface IStatsContextProps {
 const StatsContext = createContext<IStatsContextProps | undefined>(undefined);
 
 export function StatsProvider({ children }: { children: React.ReactNode }) {
-	const [fatigueAmount, setFatigueAmount] = useState<number>(100);
+	const [fatigueAmount, setFatigueAmount] = useState<number>(24);
 
 	const fatigueColors = ["red", "orange", "yellow", "green"];
 	const fatigueColor = fatigueColors[Math.floor(fatigueAmount / 25)] as string;
 	let isSleeping = false as boolean;
 
 	function sleep(amount: number) {
-		isSleeping = true;
-		setFatigueAmount(fatigueAmount + amount);
+		setFatigueAmount(fatigueAmount - amount);
 	}
 
-	useEffect(() => {
-		if (isSleeping) {
-			return;
-		}
+	// useEffect(() => {
+	// 	if (isSleeping) {
+	// 		return;
+	// 	}
 
-		if (fatigueAmount > 0) {
-			setFatigueAmount(fatigueAmount - 1 * 0.25);
-		} else {
-			setFatigueAmount(0);
-		}
-	}, [fatigueAmount]);
+	// 	const interval = setInterval(() => {
+	// 		setFatigueAmount((prev) => (prev > 0 ? prev - 0.25 : 0));
+	// 	}, 1000);
+	// 	return () => clearInterval(interval);
+	// }, [isSleeping]);
+
+	// useEffect(() => {
+	// 	if (isSleeping) {
+	// 		return;
+	// 	}
+
+	// 	if (fatigueAmount > 0) {
+	// 		setFatigueAmount(fatigueAmount - 1 * 0.25);
+	// 	} else {
+	// 		setFatigueAmount(0);
+	// 	}
+	// }, [fatigueAmount, isSleeping]);
 
 	return (
 		<StatsContext.Provider
 			value={{
 				fatigueAmount,
 				fatigueColor,
+				sleep,
 			}}
 		>
 			{children}

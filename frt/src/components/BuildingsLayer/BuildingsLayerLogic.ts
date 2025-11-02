@@ -26,8 +26,15 @@ export function useBuildingLayerLogic() {
 	const [activeBuilding, setActiveBuilding] = useState<IBuildingProps | null>(null);
 	const buildingRefs = useRef<Map<string, L.Polygon>>(new Map());
 	const cahceRef = useRef<Map<string, IBuildingProps[]>>(new Map());
+	const hasFetchedRef = useRef(false);
 
 	async function fetchBuildings(bounds: LatLngBounds): Promise<void> {
+		if (hasFetchedRef.current) {
+			return;
+		}
+
+		hasFetchedRef.current = true;
+
 		const key = BoundsKey(bounds);
 
 		if (cahceRef.current.has(key)) {
@@ -67,7 +74,7 @@ export function useBuildingLayerLogic() {
 	}
 
 	const handleBoundsChange = useCallback(fetchBuildings, []);
-	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 500);
+	const debounceedHandleBoundsChange = useDebounce(handleBoundsChange, 100);
 
 	useMapBoundsListener(debounceedHandleBoundsChange);
 
@@ -84,9 +91,7 @@ export function useBuildingLayerLogic() {
 
 		mapEvents.on("showBuildingPopup", listener);
 
-		return function cleanup() {
-			mapEvents.off("showBuildingPopup", listener);
-		};
+		return () => mapEvents.off("showBuildingPopup", listener);
 	}, [buildings]);
 
 	useEffect(() => {
